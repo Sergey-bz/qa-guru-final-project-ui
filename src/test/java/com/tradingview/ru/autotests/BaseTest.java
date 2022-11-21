@@ -1,6 +1,7 @@
 package com.tradingview.ru.autotests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.tradingview.autotests.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
@@ -14,7 +15,7 @@ public class BaseTest {
     public static String password;
 
     @BeforeAll
-    static void configure() {
+    static void setUp() {
         username = System.getProperty("username");
         password = System.getProperty("password");
 
@@ -36,12 +37,13 @@ public class BaseTest {
     }
 
     @AfterEach
-    void addAttachments() {
+    void tearDown() {
         Attach.screenshotAs("Last screenshot");
         Attach.pageSource();
         Attach.browserConsoleLogs();
         if (System.getProperty("remote_url") != null) {
             Attach.addVideo();
         }
+        Selenide.closeWebDriver();
     }
 }

@@ -1,17 +1,41 @@
 package com.tradingview.ru.autotests;
 
 import com.tradingview.autotests.pages.ChartPage;
+import com.tradingview.autotests.pages.HomePage;
+import com.tradingview.autotests.pages.SignInPage;
+import com.tradingview.autotests.pages.components.HeaderComponent;
 import io.qameta.allure.Feature;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @Feature("Chart")
-public class ExchangeTest extends UserTest {
+public class ChartTest extends BaseTest {
 
     private final ChartPage chartPage = new ChartPage();
+    private final HeaderComponent headerComponent = new HeaderComponent();
+    private final SignInPage signInPage = new SignInPage();
+    private final HomePage homePage = new HomePage();
+
+    @BeforeEach
+    public void signIn() {
+        signInPage
+                .openPage()
+                .openUserMenu()
+                .pressSignInButton()
+                .signIn(username, password);
+    }
 
     @Test
-    @DisplayName("Открытие графика")
+    @DisplayName("Sign in")
+    public void signInTest() {
+        homePage
+                .clickOnUserMenuButton()
+                .checkSignInSuccess(username);
+    }
+
+    @Test
+    @DisplayName("Open chart")
     public void openChartTest() {
         headerComponent
                 .hoverOverProducts()
@@ -22,7 +46,7 @@ public class ExchangeTest extends UserTest {
     }
 
     @Test
-    @DisplayName("Добавление индикатора на график")
+    @DisplayName("Add indicator")
     public void addIndicatorTest() {
         headerComponent
                 .hoverOverProducts()
@@ -38,7 +62,7 @@ public class ExchangeTest extends UserTest {
     }
 
     @Test
-    @DisplayName("Изменение валютной пары")
+    @DisplayName("Symbol search")
     public void symbolSearchTest() {
         headerComponent
                 .hoverOverProducts()
@@ -52,5 +76,15 @@ public class ExchangeTest extends UserTest {
                 .mainLegendShouldHaveText("U.S. Dollar / Japanese Yen");
     }
 
+    @Test
+    @DisplayName("Change language")
+    public void changeLanguageTest() {
+        homePage
+                .clickOnUserMenuButton()
+                .hoverOverLanguage()
+                .selectLanguageByValue("Русский");
 
+        headerComponent
+                .shouldHaveItems("Продукты", "Сообщество", "Рынки", "Новости", "Брокеры", "Ещё");
+    }
 }
