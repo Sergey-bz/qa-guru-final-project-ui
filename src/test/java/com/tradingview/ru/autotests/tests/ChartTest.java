@@ -1,9 +1,10 @@
-package com.tradingview.ru.autotests;
+package com.tradingview.ru.autotests.tests;
 
 import com.tradingview.autotests.pages.ChartPage;
 import com.tradingview.autotests.pages.HomePage;
 import com.tradingview.autotests.pages.SignInPage;
 import com.tradingview.autotests.pages.components.HeaderComponent;
+import com.tradingview.ru.autotests.tests.BaseTest;
 import io.qameta.allure.Feature;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
