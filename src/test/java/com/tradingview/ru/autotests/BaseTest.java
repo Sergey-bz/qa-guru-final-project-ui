@@ -1,4 +1,4 @@
-package com.tradingview.ru.autotests.tests;
+package com.tradingview.ru.autotests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
