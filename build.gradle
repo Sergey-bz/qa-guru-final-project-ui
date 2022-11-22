@@ -10,7 +10,10 @@ repositories {
     mavenCentral()
 }
 
-def allureVersion = "2.19.0"
+def allureVersion = "2.20.0",
+    junitVersion = "5.9.0",
+    selenideVersion = "6.9.0",
+    ownerVersion = "1.0.12"
 
 allure {
     report {
@@ -29,10 +32,10 @@ allure {
 
 dependencies {
     implementation(
-            'com.codeborne:selenide:6.7.4',
+            "com.codeborne:selenide:$selenideVersion",
             "io.qameta.allure:allure-selenide:$allureVersion",
-            "org.junit.jupiter:junit-jupiter:5.9.0",
-            'org.aeonbits.owner:owner:1.0.4'
+            "org.junit.jupiter:junit-jupiter:$junitVersion",
+            "org.aeonbits.owner:owner:$ownerVersion"
     )
 }
 
