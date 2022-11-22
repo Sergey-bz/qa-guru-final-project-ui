@@ -3,8 +3,10 @@ package com.tradingview.ru.autotests;
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.logevents.SelenideLogger;
+import com.tradingview.autotests.config.AuthConfig;
 import com.tradingview.autotests.helpers.Attach;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -16,8 +18,9 @@ public class BaseTest {
 
     @BeforeAll
     static void setUp() {
-        username = System.getProperty("username");
-        password = System.getProperty("password");
+        AuthConfig authConfig = ConfigFactory.create(AuthConfig.class);
+        username = authConfig.username();
+        password = authConfig.password();
 
         SelenideLogger.addListener("allure", new AllureSelenide());
 
